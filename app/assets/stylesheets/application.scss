@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+@import "pages/home";
+
+body {
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+}
