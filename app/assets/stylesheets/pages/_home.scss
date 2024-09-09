@@ -1,4 +1,45 @@
 .nav {
   display: flex;
   justify-content: space-around;
+  position: relative
+}
+
+.add {
+  position: relative;
+  left: -25px
+}
+
+header {
+  background-color: darkblue;
+  color: white;
+  height: 100px;
+}
+
+a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+button {
+  background-color: rgb(250, 237, 215);
+  height: 40px;
+  width: 116px;
+  position: absolute;
+  top: -2px;
+  border-radius: 10px;
+}
+
+li {
+  list-style: none;
+}
+
+
+
+
+button:hover {
+  background-color: rgb(251, 176, 34);
+  transition: 0.3s;
+  height: 50px;
+  width: 130px;
 }

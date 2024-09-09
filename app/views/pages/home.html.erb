@@ -1,10 +1,15 @@
-<h1>Transcribe Historical Documents</h1>
-<div class="nav">
-  <p><%= link_to "List Documents", documents_path %></p>
-  <p>Add a Document</p>
-  <% if user_signed_in? %>
-    <p><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %></p>
-  <% else %>
-    <p> <%= link_to "Login", new_user_session_path, class: "nav-link" %></p>
-  <% end %>
+<header>
+  <h1>Transcribe Historical Documents</h1>
+  <div class="nav">
+    <li><button><%= link_to "List Documents", documents_path %></button></li>
+    <li><p class="add">Add a Document</p></li>
+    <li><% if user_signed_in? %>
+      <button><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %></button>
+    <% else %>
+      <button><%= link_to "Login", new_user_session_path, class: "nav-link" %></button>
+    <% end %></li>
+  </div>
+</header>
+<div class="main">
+
 </div>
