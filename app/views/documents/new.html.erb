@@ -6,13 +6,15 @@
         <%= f.input :title,
                     required: true,
                     autofocus: true %>
-        <%= f.input :description,
+        <%= f.input :description, as: :text, :input_html => { :cols => 5, :rows => 3 },
                     required: true,
                     autofocus: true %>
-        <%= f.input :text,
+        <%= f.input :text, as: :text, :input_html => { :cols => 5, :rows => 10 },
                     autofocus: true %>
         <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-        <%= f.button :submit, "Add document", class: 'button' %>
+        <div class="text-center">
+          <%= f.button :submit, "Add Document", class: 'btn-primary' %>
+        </div>
       </div>
     <% end %>
   </div>
