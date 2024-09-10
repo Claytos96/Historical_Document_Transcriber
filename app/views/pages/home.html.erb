@@ -1,12 +1,12 @@
 <header>
   <h1>Transcribe Historical Documents</h1>
   <div class="nav">
-    <li><button><%= link_to "List Documents", documents_path %></button></li>
-    <li><p class="add"><%= link_to "Add a Document", new_document_path %></p></li>
+    <li><button class="home"><%= link_to "List Documents", documents_path %></button></li>
+    <li><button class="home"><%= link_to "Add a Document", new_document_path %></button></li>
     <li><% if user_signed_in? %>
-      <button><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %></button>
+      <button class="home"><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %></button>
     <% else %>
-      <button><%= link_to "Login", new_user_session_path, class: "nav-link" %></button>
+      <button class="home"><%= link_to "Login", new_user_session_path %></button>
     <% end %></li>
   </div>
 </header>

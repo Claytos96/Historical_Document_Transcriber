@@ -1,17 +1,19 @@
 <div class="add-doc">
   <h1>Add Your Document</h1>
-  <%= simple_form_for [@document] do |f| %>
-    <div class="form">
-      <%= f.input :title,
-                  required: true,
-                  autofocus: true %>
-      <%= f.input :description,
-                  required: true,
-                  autofocus: true %>
-      <%= f.input :text,
-                  autofocus: true %>
-      <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-      <%= f.button :submit, "Add document", class: 'button' %>
+  <div class="content">
+    <%= simple_form_for [@document] do |f| %>
+      <div class="form">
+        <%= f.input :title,
+                    required: true,
+                    autofocus: true %>
+        <%= f.input :description,
+                    required: true,
+                    autofocus: true %>
+        <%= f.input :text,
+                    autofocus: true %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+        <%= f.button :submit, "Add document", class: 'button' %>
+      </div>
     <% end %>
-    </div>
+  </div>
 </div>
