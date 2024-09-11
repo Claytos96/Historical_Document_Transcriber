@@ -1,13 +1,13 @@
 .nav {
   display: flex;
   justify-content: space-around;
-  position: relative
+  position: relative;
 }
 
 
 
 header {
-  background-color: darkblue;
+  background: linear-gradient(90deg, rgba(57,66,144,1) 0%, rgba(34,46,251,1) 47%, rgba(0,0,0,1) 100%);
   color: white;
   height: 100px;
 }
@@ -25,7 +25,7 @@ button.home {
   background-color: rgb(250, 237, 215);
   height: 40px;
   width: 116px;
-  position: absolute;
+  position: relative;
   top: -2px;
   border-radius: 10px;
   transition: background-color 0.3s, transform 0.3s;
@@ -35,9 +35,6 @@ button.home {
 li {
   list-style: none;
 }
-
-
-
 
 button:hover {
   background-color: rgb(251, 176, 34);
