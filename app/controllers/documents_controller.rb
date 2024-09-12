@@ -10,7 +10,8 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(document_params)
-    @document.save
+    @document.save!
+    redirect_to root_path
   end
 
   def show
