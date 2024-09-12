@@ -10,6 +10,7 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(document_params)
+    @document.user = current_user
     @document.save!
     redirect_to root_path
   end
@@ -35,6 +36,6 @@ class DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:image, :title, :description, :text, :user_id)
+    params.require(:document).permit(:image, :title, :description, :text, :user_id, photos: [])
   end
 end
