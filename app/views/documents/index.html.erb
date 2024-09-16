@@ -1,1 +1,10 @@
 <h1>Documents</h1>
+<div class="d-flex justify-content-center">
+<div class="doc-list col-6">
+  <% if @documents.any? %>
+    <% @documents.each do |document| %>
+      <%= render "card", document: document %>
+    <% end %>
+  <% end %>
+</div>
+</div>
