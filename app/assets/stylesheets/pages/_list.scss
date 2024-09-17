@@ -1,18 +1,27 @@
 .pic {
-  height: 100px;
+  height: 100%;
   width: 100px;
 }
 
 .info {
   margin-left: 10px;
+  margin-right: 10px;
+  width: 100%;
 }
 
 img {
- height: 100px;
+ height: 100%;
  width: 100px;
 }
 
 .doc {
   display: flex;
   margin: 30px;
+  border: 5px solid darkblue;
+  background-color: white;
+  height: 150px;
+}
+
+.info .title {
+ border-bottom: 1px dashed black;
 }

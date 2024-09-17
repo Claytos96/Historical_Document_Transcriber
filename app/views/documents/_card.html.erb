@@ -1,11 +1,13 @@
 <div class="doc">
   <div class="pic">
     <% if document.file.attached? %>
-      <%= cl_image_tag document.file.key, height: 300, width: 400, crop: :fill %>
+      <%= cl_image_tag document.file.key, crop: :fill %>
     <% end %>
   </div>
   <div class="info">
-    <h2><%= document.title %></h2>
+    <div class="title">
+      <h2><%= document.title %></h2>
+    </div>
     <p><%= document.description %></p>
   </div>
 </div>
