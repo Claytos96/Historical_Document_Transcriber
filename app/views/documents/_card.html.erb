@@ -1,7 +1,7 @@
 <div class="doc">
   <div class="pic">
-    <% if document.file.attached? && document.file.previewable? %>
-      <%= image_tag document.file.preview(resize_to_limit: [100, 100]) %>
+    <% if document.file.attached? %>
+      <%= cl_image_tag document.file.key %>
     <% end %>
   </div>
   <div class="info">

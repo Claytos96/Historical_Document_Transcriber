@@ -10,6 +10,7 @@
 
 puts "Cleaning database..."
 User.destroy_all
+Document.destroy_all
 
 puts "Creating users..."
 hugh = {username: "hclay", password: "123456", email: "hughgrassbyclayton@hotmail.com"}
