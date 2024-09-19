@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-right: 1px solid darkblue;
 }
 
 .info {
@@ -30,6 +31,6 @@
 canvas {
   border: 1px solid #ddd;
   max-width: 100%; /* Make canvas responsive */
-  max-height: 200px; /* Limit the height for consistency */
+  max-height: 100%; /* Limit the height for consistency */
   margin-top: 10px; /* Space above the canvas */
 }

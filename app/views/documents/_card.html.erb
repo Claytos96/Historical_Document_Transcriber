@@ -4,29 +4,31 @@
       <canvas id="pdf-canvas-<%= document.id %>"></canvas>
 
       <script>
-          document.addEventListener("turbo:load", function() {
-            const pdfUrl = '<%= url_for(document.file) %>';
-            const loadingTask = pdfjsLib.getDocument(pdfUrl);
-            loadingTask.promise.then(pdf => {
-              pdf.getPage(1).then(page => {
-                const scale = 1.5;
-                const viewport = page.getViewport({ scale: scale });
-                const canvas = document.getElementById('pdf-canvas-<%= document.id %>');
-                const context = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
+        document.addEventListener("turbo:load", function() {
+        const pdfUrl = '<%= url_for(document.file) %>';
+        const canvas = document.getElementById('pdf-canvas-<%= document.id %>');
+        if (canvas) {
+          const loadingTask = pdfjsLib.getDocument(pdfUrl);
+          loadingTask.promise.then(pdf => {
+            pdf.getPage(1).then(page => {
+              const scale = 1.5;
+              const viewport = page.getViewport({ scale: scale });
+              const context = canvas.getContext('2d');
+              canvas.height = viewport.height;
+              canvas.width = viewport.width;
 
-                const renderContext = {
-                  canvasContext: context,
-                  viewport: viewport
-                };
-                page.render(renderContext);
-              });
-            }).catch(error => {
-              console.error('Error loading PDF:', error);
+              const renderContext = {
+                canvasContext: context,
+                viewport: viewport
+              };
+              page.render(renderContext);
             });
+          }).catch(error => {
+            console.error('Error loading PDF:', error);
           });
-        </script>
+        }
+      });
+      </script>
     <% end %>
   </div>
   <div class="info">
