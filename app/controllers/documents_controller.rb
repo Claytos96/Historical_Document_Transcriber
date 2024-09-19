@@ -16,7 +16,9 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    @docuemnt = Document.find(params[:id])
+    @document = Document.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to documents_path, alert: 'Document not found.'
   end
 
   def edit

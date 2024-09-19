@@ -1,0 +1,9 @@
+<% if @document %>
+
+  <h1><%= @document.title %></h1>
+
+  <p><%= @document.description %></p>
+
+<% else %>
+  <p>Document not found</p>
+<% end %>

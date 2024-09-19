@@ -3,7 +3,9 @@
 <div class="doc-list col-6">
   <% if @documents.any? %>
     <% @documents.each do |document| %>
-      <%= render "card", document: document %>
+      <a href="<%= document_path(document) %>">
+        <%= render "card", document: document %>
+      </a>
     <% end %>
   <% end %>
 </div>
