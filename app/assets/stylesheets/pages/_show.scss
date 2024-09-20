@@ -1,0 +1,16 @@
+iframe {
+  width: 50%;
+  height: 600px; /* Adjust the height as needed */
+  border: none;
+}
+
+#pdf-container {
+  width: 50%;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 500px; /* Set a max height */
+}
+
+canvas {
+  display: block; /* Remove any space below canvas */
+  margin: 10px 0; /* Add some space between pages */
+}
