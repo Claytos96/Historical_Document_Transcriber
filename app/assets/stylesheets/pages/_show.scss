@@ -8,9 +8,10 @@ iframe {
   width: 50%;
   overflow-y: auto; /* Enable vertical scrolling */
   max-height: 500px; /* Set a max height */
+  position: relative;
 }
 
 canvas {
   display: block; /* Remove any space below canvas */
-  margin: 10px 0; /* Add some space between pages */
+  margin: 10px auto; /* Add some space between pages */
 }
