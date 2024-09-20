@@ -1,7 +1,7 @@
 <div class="doc">
   <div class="pic">
     <% if document.file.attached? %>
-      <canvas id="pdf-canvas-<%= document.id %>"></canvas>
+      <canvas class="preview" id="pdf-canvas-<%= document.id %>"></canvas>
 
       <script>
         document.addEventListener("turbo:load", function() {
