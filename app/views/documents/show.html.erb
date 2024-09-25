@@ -146,3 +146,15 @@
   document.addEventListener('turbo:load', initPDF);
 
 </script>
+
+<div class='transcription'>
+  <h3>Transcription</h3>
+  <%= simple_form_for [@document], url: document_path(@document), method: :put do |f| %>
+    <div class="box">
+      <%= f.input :transcription, as: :text, :input_html => { :cols => 1, :rows => 20 } %>
+    </div>
+    <div class="text-center">
+          <%= f.button :submit, "Save", class: 'btn-primary' %>
+    </div>
+  <% end %>
+</div>

@@ -28,6 +28,7 @@ class DocumentsController < ApplicationController
   def update
     @document = Document.find(params[:id])
     @document.update(document_params)
+    redirect_to documents_path
   end
 
   def destroy
