@@ -38,6 +38,6 @@ class DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:image, :title, :description, :text, :user_id, :file)
+    params.require(:document).permit(:image, :title, :description, :transcription, :user_id, :file)
   end
 end
