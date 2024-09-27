@@ -5,7 +5,7 @@ iframe {
 }
 
 #pdf-container {
-  width: 50%;
+  width: 100%;
   overflow-y: auto; /* Enable vertical scrolling */
   max-height: 500px; /* Set a max height */
   position: relative;
@@ -14,4 +14,22 @@ iframe {
 canvas {
   display: block; /* Remove any space below canvas */
   margin: 10px auto; /* Add some space between pages */
+}
+
+.show {
+  display: flex;
+
+}
+
+.container-outer {
+  width: 50%;
+  margin-left: 50px;
+}
+
+.transcription {
+  margin-top: 10px;
+}
+
+.head {
+  border-bottom: 3px solid darkblue;
 }

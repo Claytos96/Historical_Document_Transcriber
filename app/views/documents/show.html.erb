@@ -26,135 +26,141 @@
     </script>
 </head>
 
-<% if @document %>
+<div class="head">
+  <% if @document %>
 
-  <h1><%= @document.title %></h1>
+    <h1><%= @document.title %></h1>
 
-  <p><%= @document.description %></p>
+    <p class="mx-5 fs-5"><%= @document.description %></p>
 
-<% else %>
-  <p>Document not found</p>
-<% end %>
+  <% else %>
+    <p>Document not found</p>
+  <% end %>
+</div>
 
-<p>Hold control key to zoom</p>
-<div id="pdf-container"></div>
+<div class="show">
+  <div class='transcription'>
 
-<script>
-  function initPDF() {
-      const url = '<%= url_for(@document.file) %>';
-      const pdfjsLib = window['pdfjs-dist/build/pdf'];
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+    <%= simple_form_for [@document], url: document_path(@document), method: :put do |f| %>
+      <div class="box">
+        <%= f.input :transcription, as: :text, :input_html => { :cols => 70, :rows => 20 } %>
+      </div>
+      <div class="text-center">
+            <%= f.button :submit, "Save", class: 'btn-primary' %>
+      </div>
+    <% end %>
+  </div>
 
-      let pdfDoc = null;
-      let scale = 1.0; // Start with a default zoom level
+  <div class="container-outer">
+    <p class="text-end mb-1">Hold control key to zoom</p>
+    <div id="pdf-container"></div>
+  </div>
+  <script>
+    function initPDF() {
+        const url = '<%= url_for(@document.file) %>';
+        const pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
 
-      function loadPDF() {
-          const loadingTask = pdfjsLib.getDocument(url);
-          loadingTask.promise.then(pdf => {
-              pdfDoc = pdf;
-              renderAllPages(); // Render all pages initially
-          }).catch(error => {
-              console.error('Error loading PDF: ', error);
-          });
-      }
+        let pdfDoc = null;
+        let scale = 1.0; // Start with a default zoom level
 
-      function renderAllPages() {
-          const container = document.getElementById('pdf-container');
-          container.innerHTML = ''; // Clear the container before rendering
+        function loadPDF() {
+            const loadingTask = pdfjsLib.getDocument(url);
+            loadingTask.promise.then(pdf => {
+                pdfDoc = pdf;
+                renderAllPages(); // Render all pages initially
+            }).catch(error => {
+                console.error('Error loading PDF: ', error);
+            });
+        }
 
-          for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-              pdfDoc.getPage(pageNum).then(page => {
-                  const viewport = page.getViewport({ scale });
-                  const canvas = document.createElement('canvas');
-                  const context = canvas.getContext('2d');
-                  canvas.height = viewport.height;
-                  canvas.width = viewport.width;
+        function renderAllPages() {
+            const container = document.getElementById('pdf-container');
+            container.innerHTML = ''; // Clear the container before rendering
 
-                  const renderContext = {
-                      canvasContext: context,
-                      viewport: viewport
-                  };
-                  page.render(renderContext);
+            for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+                pdfDoc.getPage(pageNum).then(page => {
+                    const viewport = page.getViewport({ scale });
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
 
-                  // Append the canvas to the container
-                  container.appendChild(canvas);
-              });
-          }
-      }
+                    const renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    page.render(renderContext);
 
-      // Mouse wheel zooming with Ctrl key
-      const container = document.getElementById('pdf-container');
-      container.addEventListener('wheel', (event) => {
-          if (event.ctrlKey) {
-              event.preventDefault(); // Prevent the default scroll behavior
+                    // Append the canvas to the container
+                    container.appendChild(canvas);
+                });
+            }
+        }
 
-              const mouseX = event.clientX - container.getBoundingClientRect().left;
-              const mouseY = event.clientY - container.getBoundingClientRect().top;
+        // Mouse wheel zooming with Ctrl key
+        const container = document.getElementById('pdf-container');
+        container.addEventListener('wheel', (event) => {
+            if (event.ctrlKey) {
+                event.preventDefault(); // Prevent the default scroll behavior
 
-              const previousScale = scale;
+                const mouseX = event.clientX - container.getBoundingClientRect().left;
+                const mouseY = event.clientY - container.getBoundingClientRect().top;
 
-              if (event.deltaY < 0) {
-                  scale += 0.1; // Zoom in
-              } else {
-                  scale = Math.max(scale - 0.1, 0.2); // Zoom out
-              }
+                const previousScale = scale;
 
-              const newScale = scale / previousScale;
+                if (event.deltaY < 0) {
+                    scale += 0.1; // Zoom in
+                } else {
+                    scale = Math.max(scale - 0.1, 0.2); // Zoom out
+                }
 
-              container.scrollLeft += (mouseX * newScale) - mouseX;
-              container.scrollTop += (mouseY * newScale) - mouseY;
+                const newScale = scale / previousScale;
 
-              if (pdfDoc) renderAllPages(); // Re-render all pages with the new scale if pdfDoc is loaded
-          }
+                container.scrollLeft += (mouseX * newScale) - mouseX;
+                container.scrollTop += (mouseY * newScale) - mouseY;
+
+                if (pdfDoc) renderAllPages(); // Re-render all pages with the new scale if pdfDoc is loaded
+            }
+        });
+
+        // Click and Drag Functionality
+      container.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          startX = e.pageX - container.offsetLeft;
+          startY = e.pageY - container.offsetTop;
+          scrollLeft = container.scrollLeft;
+          scrollTop = container.scrollTop;
       });
 
-      // Click and Drag Functionality
-    container.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.pageX - container.offsetLeft;
-        startY = e.pageY - container.offsetTop;
-        scrollLeft = container.scrollLeft;
-        scrollTop = container.scrollTop;
-    });
+      container.addEventListener('mouseleave', () => {
+          isDragging = false;
+      });
 
-    container.addEventListener('mouseleave', () => {
-        isDragging = false;
-    });
+      container.addEventListener('mouseup', () => {
+          isDragging = false;
+      });
 
-    container.addEventListener('mouseup', () => {
-        isDragging = false;
-    });
+      container.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
 
-    container.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
+          e.preventDefault();
+          const x = e.pageX - container.offsetLeft;
+          const y = e.pageY - container.offsetTop;
 
-        e.preventDefault();
-        const x = e.pageX - container.offsetLeft;
-        const y = e.pageY - container.offsetTop;
+          const walkX = (x - startX);
+          const walkY = (y - startY);
 
-        const walkX = (x - startX);
-        const walkY = (y - startY);
+          container.scrollLeft = scrollLeft - walkX;
+          container.scrollTop = scrollTop - walkY;
+      });
 
-        container.scrollLeft = scrollLeft - walkX;
-        container.scrollTop = scrollTop - walkY;
-    });
+        // Load the PDF initially
+        loadPDF();
+    }
 
-      // Load the PDF initially
-      loadPDF();
-  }
+    document.addEventListener('turbo:load', initPDF);
 
-  document.addEventListener('turbo:load', initPDF);
+  </script>
 
-</script>
-
-<div class='transcription'>
-  <h3>Transcription</h3>
-  <%= simple_form_for [@document], url: document_path(@document), method: :put do |f| %>
-    <div class="box">
-      <%= f.input :transcription, as: :text, :input_html => { :cols => 1, :rows => 20 } %>
-    </div>
-    <div class="text-center">
-          <%= f.button :submit, "Save", class: 'btn-primary' %>
-    </div>
-  <% end %>
 </div>
