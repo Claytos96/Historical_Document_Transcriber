@@ -1,4 +1,36 @@
 .login {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   padding-top: 100px;
+  background: linear-gradient(90deg, rgba(57,66,144,1) 0%, rgba(34,46,251,1) 47%, rgba(0,0,0,1) 100%);
+  width: 800px;
+  margin: auto;
+  border: 3px solid gold;
+  border-radius: 20px;
+}
+
+.field {
+  padding: 5px;
+  color: white;
+  width: 300px;
+
+}
+
+.field input {
+  border: 3px solid gold;
+  width: 300px;
+}
+
+.remember {
+  color: white;
+  margin-left: 4px;
+  padding: 5px 0;
+}
+
+.remember input {
+  margin: 0;
+}
+
+.remember label {
+  margin: 0;
 }
