@@ -11,5 +11,14 @@
   </div>
 </header>
 <div class="main">
-
+  <div>
+    <%= form_with url: documents_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Search Documents"
+      %>
+      <%= submit_tag "Search", name: "", class: "btn-primary" %>
+      <% end %>
+  </div>
 </div>
