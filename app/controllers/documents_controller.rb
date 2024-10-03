@@ -3,7 +3,8 @@ class DocumentsController < ApplicationController
   def index
     @documents = Document.all
     if params[:query].present?
-      @documents = @documents.where("LOWER(title) LIKE LOWER(?)", "%#{params[:query]}%")
+      query = "%#{params[:query].downcase}"
+      @documents = @documents.where("LOWER(title) LIKE ? or LOWER(description) LIKE ?", query, query)
     end
   end
 
