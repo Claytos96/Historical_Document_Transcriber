@@ -40,3 +40,41 @@ button:hover {
   background-color: rgb(251, 176, 34);
   transform: scale(1.1)
 }
+
+.search {
+  margin-top: 200px;
+  height: 70px;
+}
+
+.search .search-bar {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border: 1px solid #0b498b;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.search .search-bar:focus {
+  border-color: #0056b3; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); /* Add shadow on focus */
+  outline: none; /* Remove default outline */
+}
+
+.button {
+  width: 120px;
+  height: 69px;
+  font-size: large;
+  background-color: rgb(7, 7, 122);
+  color: white;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 7px rgb(7, 7, 122);
+}
+
+.button:hover {
+  background-color: #0056b3; /* Change background on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}

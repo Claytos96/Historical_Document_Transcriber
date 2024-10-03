@@ -10,15 +10,15 @@
     <% end %></li>
   </div>
 </header>
-<div class="main">
-  <div>
-    <%= form_with url: documents_path, method: :get, class: "d-flex" do %>
+<div class="main d-flex justify-content-center">
+  <div class="col-5">
+    <%= form_with url: documents_path, method: :get, class: "d-flex search" do %>
       <%= text_field_tag :query,
           params[:query],
-          class: "form-control",
+          class: "form-control search-bar",
           placeholder: "Search Documents"
       %>
-      <%= submit_tag "Search", name: "", class: "btn-primary" %>
+      <%= submit_tag "Search", name: "", class: "button" %>
       <% end %>
   </div>
 </div>
