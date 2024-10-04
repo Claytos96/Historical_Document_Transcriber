@@ -11,7 +11,7 @@
   </div>
 </header>
 <div class="main d-flex justify-content-center">
-  <div class="col-5 search-container">
+  <div class="col-7 search-container">
     <%= form_with url: documents_path, method: :get, class: "d-flex search" do %>
       <%= text_field_tag :query,
           params[:query],
