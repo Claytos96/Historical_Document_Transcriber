@@ -42,39 +42,54 @@ button:hover {
 }
 
 .search {
-  margin-top: 200px;
-  height: 70px;
+  margin: 50px;
+
+  border-radius: 25px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: rgb(7, 7, 122); /* Light background for contrast */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  overflow: hidden; /* Ensures the button fits nicely */
 }
 
 .search .search-bar {
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-  border: 1px solid #0b498b;
+  border: 5px solid rgb(7, 7, 122);
   padding: 10px;
   font-size: 20px;
+  flex: 1; /* Allow search bar to take available space */
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  transition: border-color 0.3s ease; /* Smooth transition */
+
 }
 
 .search .search-bar:focus {
-  border-color: #0056b3; /* Change border color on focus */
-  box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); /* Add shadow on focus */
+  border: 3px solid #2297db;
+
   outline: none; /* Remove default outline */
 }
 
 .button {
   width: 120px;
-  height: 69px;
+  height: 65px;
   font-size: large;
-  background-color: rgb(7, 7, 122);
-  color: white;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  background-color: rgb(158, 158, 158);
+  color: black;
+  border: none;
+
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  border: none;
-  box-shadow: 2px 2px 7px rgb(7, 7, 122);
+  font-weight: bold;
 }
 
 .button:hover {
-  background-color: #0056b3; /* Change background on hover */
+  background-color: #d0d1d3; /* Change background on hover */
   transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.search-container {
+  background-color: rgb(7, 7, 122);
+  margin: 100px;
+  border-radius: 25px;
 }
