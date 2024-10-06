@@ -9,6 +9,14 @@
         %>
         <%= submit_tag "Search", name: "", class: "button" %>
         <% end %>
+        <br>
+        <div class="property-counter">
+          <% if @documents.present? %>
+            <p><%= @documents.size %> search results</p>
+          <% else %>
+            <p>No documents found</p>
+          <% end %>
+        </div>
     </div>
 </div>
 <div class="d-flex justify-content-center">
