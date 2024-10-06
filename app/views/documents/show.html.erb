@@ -127,6 +127,8 @@
         // Click and Drag Functionality
       container.addEventListener('mousedown', (e) => {
           isDragging = true;
+          container.classList.remove('grab');
+          container.classList.add('grabbing');
           startX = e.pageX - container.offsetLeft;
           startY = e.pageY - container.offsetTop;
           scrollLeft = container.scrollLeft;
@@ -135,10 +137,14 @@
 
       container.addEventListener('mouseleave', () => {
           isDragging = false;
+          container.classList.remove('grabbing');
+          container.classList.add('grab');
       });
 
       container.addEventListener('mouseup', () => {
           isDragging = false;
+          container.classList.remove('grabbing')
+          container.classList.add('grab')
       });
 
       container.addEventListener('mousemove', (e) => {
@@ -155,6 +161,7 @@
           container.scrollTop = scrollTop - walkY;
       });
 
+      container.classList.add('grab')
         // Load the PDF initially
         loadPDF();
     }
