@@ -72,3 +72,10 @@ canvas.preview {
   background-color: #0056b3; /* Change background on hover */
   transform: scale(1.05); /* Slightly enlarge on hover */
 }
+
+.head-index {
+  background: linear-gradient(90deg, rgba(57,66,144,1) 0%, rgba(34,46,251,1) 47%, rgba(0,0,0,1) 100%);
+  color: white;
+  border: 3px solid goldenrod;
+  height: 100px;
+}
