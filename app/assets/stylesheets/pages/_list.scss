@@ -1,3 +1,11 @@
+.results {
+  background-color: rgb(250, 237, 215);
+  width: 900px;
+  margin: auto;
+  border-left: 3px solid darkblue;
+  border-right: 3px solid darkblue;
+}
+
 .pic {
   height: 100%;
   width: 100px;
@@ -76,6 +84,5 @@ canvas.preview {
 .head-index {
   background: linear-gradient(90deg, rgba(57,66,144,1) 0%, rgba(34,46,251,1) 47%, rgba(0,0,0,1) 100%);
   color: white;
-  border: 3px solid goldenrod;
   height: 100px;
 }
