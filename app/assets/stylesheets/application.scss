@@ -26,8 +26,12 @@
 body {
 
   background-color: rgb(250, 237, 215);
-  background-image: url("https://s.hdnux.com/photos/01/40/76/04/25420061/5/1920x0.jpg");
-  background-size: 105%;
+  background-image: url("letters.jpeg");
+  background-size: cover;
+}
+
+body.exempt-background {
+  background-image: none;
 }
 
 h1 {

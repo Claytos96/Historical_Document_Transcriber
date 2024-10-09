@@ -17,7 +17,7 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
   </head>
 
-  <body>
+  <body class="<%= controller_name == 'documents' && action_name == 'show' ? 'exempt-background' : '' %>">
     <% unless controller_name == 'pages' && action_name %>
       <%= render 'shared/home_button' %>
     <% end %>
