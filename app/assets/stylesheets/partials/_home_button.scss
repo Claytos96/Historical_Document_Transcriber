@@ -5,10 +5,22 @@
   margin-top: 10px;
 }
 
+.home-button-index {
+  margin-left: 35px;
+
+  font-size: 40px;
+  color: black;
+}
+
 .home-button:hover {
   color: darkgrey;
 }
 
 .home-button-container {
   position: absolute;
+}
+
+.home-button-container-index {
+  position: absolute;
+  margin-top: 17px;
 }

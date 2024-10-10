@@ -24,7 +24,7 @@
 @import "bootstrap";
 
 body {
-
+  margin: 20px;
   background-color: rgb(250, 237, 215);
   background-image: url("letters.jpeg");
   background-size: cover;
@@ -37,6 +37,7 @@ body.exempt-background {
 body.index-background {
   background-image: url("handwritting.png");
   background-size: 50%;
+  margin: 0;
 }
 
 h1 {

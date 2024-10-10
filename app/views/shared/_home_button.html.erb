@@ -1,3 +1,5 @@
-<div class="home-button-container">
-  <%= link_to '<i class="bi bi-house-door-fill"></i>'.html_safe, root_path, class: 'home-button' %>
+<% button_class = controller_name == 'documents' && action_name == 'index' ? 'home-button-index' : 'home-button' %>
+
+<div class="<%= controller_name == 'documents' && action_name == 'index' ? 'home-button-container-index' : 'home-button-container'%>">
+  <%= link_to '<i class="bi bi-house-door-fill"></i>'.html_safe, root_path, class: button_class %>
 </div>
