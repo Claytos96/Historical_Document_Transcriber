@@ -1,7 +1,6 @@
 .form {
   padding: 20px;
   width: 600px;
-  color: white;
 }
 
 .form .form-control {
@@ -9,8 +8,8 @@
 }
 
 .content {
-  display: flex;
-  justify-content: center;
+  padding-top: 20px;
+  color: white;
   background: linear-gradient(90deg, rgba(57,66,144,1) 0%, rgba(34,46,251,1) 47%, rgba(0,0,0,1) 100%);
   width: 800px;
   margin: auto;
@@ -20,4 +19,13 @@
 
 .btn {
   background-color: goldenrod;
+}
+
+.add-doc {
+  display: flex;
+  justify-content: center;
+}
+
+.content .h1 {
+  color: white;
 }
