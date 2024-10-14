@@ -40,6 +40,10 @@ class DocumentsController < ApplicationController
     @document.destroy
   end
 
+  def your_documents
+    @documents = Document.where(user: current_user)
+  end
+
   private
 
   def document_params
