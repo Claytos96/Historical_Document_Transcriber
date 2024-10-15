@@ -105,7 +105,7 @@
           img = document.createElement('img')
           img.src = url;
           img.style.maxWidth = '100%'; // Scale the image to fit the container
-          img.style.cursor = 'zoom-in'; // Change cursor on hover
+
 
           img.onload = () => {
               img.style.transform = `scale(${scale})`; // Apply initial scale
@@ -159,7 +159,12 @@
         });
 
         // Click and Drag Functionality
+      let isDragging = false;
+      let startX, startY, scrollLeft, scrollTop
+
       container.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+
           isDragging = true;
           container.classList.remove('grab');
           container.classList.add('grabbing');
