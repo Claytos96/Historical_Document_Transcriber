@@ -98,6 +98,34 @@
             }
         }
 
+        let img;
+
+        function loadImage() {
+          const container = document.getElementById('pdf-container')
+          img = document.createElement('img')
+          img.src = url;
+          img.style.maxWidth = '100%'; // Scale the image to fit the container
+          img.style.cursor = 'zoom-in'; // Change cursor on hover
+
+          img.onload = () => {
+              img.style.transform = `scale(${scale})`; // Apply initial scale
+              img.style.transition = `transform 0.2s`; // Smooth scaling transition
+              container.appendChild(img);
+          };
+
+          img.onerror = () => {
+              console.error('Error loading image: ', url);
+          };
+        }
+
+         // Determine file type
+        const isPDF = url.endsWith('.pdf');
+        if (isPDF) {
+            loadPDF(); // Load as PDF
+        } else {
+            loadImage(); // Load as image
+        }
+
         // Mouse wheel zooming with Ctrl key
         const container = document.getElementById('pdf-container');
         container.addEventListener('wheel', (event) => {
@@ -117,10 +145,16 @@
 
                 const newScale = scale / previousScale;
 
-                container.scrollLeft += (mouseX * newScale) - mouseX;
-                container.scrollTop += (mouseY * newScale) - mouseY;
-
-                if (pdfDoc) renderAllPages(); // Re-render all pages with the new scale if pdfDoc is loaded
+                if (pdfDoc) {
+                    container.scrollLeft += (mouseX * newScale) - mouseX;
+                    container.scrollTop += (mouseY * newScale) - mouseY;
+                  renderAllPages(); // Re-render pages with new scale
+                } else if (img) {
+                    console.log('zooming JPEG');
+                    img.style.transform = `scale(${scale})`; // Update the scale of the image
+                    img.style.transformOrigin = `${mouseX}px ${mouseY}px`; // Set zoom origin to mouse position
+                    img.style.transition = 'transform 0.2s'; // Smooth scaling transition
+                }
             }
         });
 
