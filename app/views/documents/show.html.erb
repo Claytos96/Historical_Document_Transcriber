@@ -105,16 +105,18 @@
           img = document.createElement('img')
           img.src = url;
           img.style.maxWidth = '100%'; // Scale the image to fit the container
-
-
-          img.onload = () => {
-              img.style.transform = `scale(${scale})`; // Apply initial scale
-              img.style.transition = `transform 0.2s`; // Smooth scaling transition
-              container.appendChild(img);
-          };
+          img.style.transition = `transform 0.2s`; // Smooth scaling transition
+          img.style.transform = `scale(${scale})`; // Apply initial scale
+          container.appendChild(img);
 
           img.onerror = () => {
               console.error('Error loading image: ', url);
+          };
+
+          img.onload = () => {
+            // Adjust the container size if needed
+            container.style.width = `${img.width}px`;
+            container.style.height = `${img.height}px`;
           };
         }
 
@@ -150,10 +152,8 @@
                     container.scrollTop += (mouseY * newScale) - mouseY;
                   renderAllPages(); // Re-render pages with new scale
                 } else if (img) {
-                    console.log('zooming JPEG');
                     img.style.transform = `scale(${scale})`; // Update the scale of the image
                     img.style.transformOrigin = `${mouseX}px ${mouseY}px`; // Set zoom origin to mouse position
-                    img.style.transition = 'transform 0.2s'; // Smooth scaling transition
                 }
             }
         });
@@ -168,8 +168,8 @@
           isDragging = true;
           container.classList.remove('grab');
           container.classList.add('grabbing');
-          startX = e.pageX - container.offsetLeft;
-          startY = e.pageY - container.offsetTop;
+          startX = e.pageX;
+          startY = e.pageY;
           scrollLeft = container.scrollLeft;
           scrollTop = container.scrollTop;
       });
@@ -190,8 +190,8 @@
           if (!isDragging) return;
 
           e.preventDefault();
-          const x = e.pageX - container.offsetLeft;
-          const y = e.pageY - container.offsetTop;
+          const x = e.pageX;
+          const y = e.pageY;
 
           const walkX = (x - startX);
           const walkY = (y - startY);
