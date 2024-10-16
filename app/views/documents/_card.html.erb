@@ -2,13 +2,15 @@
   <div class="pic">
     <% if document.file.attached? %>
       <canvas class="preview" id="pdf-canvas-<%= document.id %>"></canvas>
-
+      <img class="preview" id="jpeg-image-<%= document.id %>"/>
       <script>
         document.addEventListener("turbo:load", function() {
-        const pdfUrl = '<%= url_for(document.file) %>';
+        const fileUrl = '<%= url_for(document.file) %>';
         const canvas = document.getElementById('pdf-canvas-<%= document.id %>');
-        if (canvas) {
-          const loadingTask = pdfjsLib.getDocument(pdfUrl);
+        const img = document.getElementById('jpeg-image-<%= document.id %>');
+        const fileExtension = fileUrl.split('.').pop().toLowerCase();
+        if (fileExtension === 'pdf') {
+          const loadingTask = pdfjsLib.getDocument(fileUrl);
           loadingTask.promise.then(pdf => {
             pdf.getPage(1).then(page => {
               const scale = 1.5;
@@ -26,6 +28,12 @@
           }).catch(error => {
             console.error('Error loading PDF:', error);
           });
+        } else if (fileExtension === 'jpeg' || fileExtension === 'jpg') {
+          img.src = fileUrl;
+          img.style.display = 'block'; // Show image
+          canvas.style.display = 'none'; // Hide canvas
+        } else {
+          console.error('Unsupported file type:', fileExtension);
         }
       });
       </script>
