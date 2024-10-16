@@ -38,6 +38,7 @@ body.index-background {
   background-image: url("handwritting.png");
   background-size: 50%;
   margin: 0;
+  background-attachment: fixed; /* Makes the background fixed */
 }
 
 h1 {
