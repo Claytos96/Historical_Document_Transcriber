@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :documents
+  resources :documents do
+    member do
+      get :versions
+    end
+  end
 
   get "/your_documnets", to: "documents#your_documents", as: 'your_documents'
 

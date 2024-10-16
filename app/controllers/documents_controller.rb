@@ -44,6 +44,11 @@ class DocumentsController < ApplicationController
     @documents = Document.where(user: current_user)
   end
 
+  def versions
+    @document = Document.find(params[:id])
+    @versions = @document.versions
+  end
+
   private
 
   def document_params
