@@ -28,12 +28,10 @@
           }).catch(error => {
             console.error('Error loading PDF:', error);
           });
-        } else if (fileExtension === 'jpeg' || fileExtension === 'jpg') {
+        } else {
           img.src = fileUrl;
           img.style.display = 'block'; // Show image
           canvas.style.display = 'none'; // Hide canvas
-        } else {
-          console.error('Unsupported file type:', fileExtension);
         }
       });
       </script>
