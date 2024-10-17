@@ -50,7 +50,7 @@
       </div>
     <% end %>
     <br>
-    <p>Last updated by <%= User.find(@versions.last.whodunnit).username %> at <%= @versions.last.created_at %></p>
+    <p><%= link_to "Last updated by #{User.find(@versions.last.whodunnit).username} at #{@versions.last.created_at}", versions_document_path(@document)%></p>
   </div>
 
   <div class="container-outer">
