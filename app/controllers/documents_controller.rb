@@ -21,6 +21,7 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
+    @versions = @document.versions
   rescue ActiveRecord::RecordNotFound
     redirect_to documents_path, alert: 'Document not found.'
   end

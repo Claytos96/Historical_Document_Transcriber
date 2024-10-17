@@ -49,6 +49,8 @@
             <%= f.button :submit, "Save", class: 'btn-primary' %>
       </div>
     <% end %>
+    <br>
+    <p>Last updated at <%= @versions.last.created_at %></p>
   </div>
 
   <div class="container-outer">
