@@ -1,0 +1,8 @@
+<h1>Edit History</h1>
+
+<% @versions.each do |version| %>
+  <% user = User.find_by(id: version.whodunnit) %>
+  <% if user %>
+    <p><%= version.created_at %> updated by <%= user.username %></p>
+  <% end %>
+<% end %>
