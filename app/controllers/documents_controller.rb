@@ -32,6 +32,7 @@ class DocumentsController < ApplicationController
 
   def update
     @document = Document.find(params[:id])
+    PaperTrail.request.whodunnit = current_user.id if current_user
     @document.update(document_params)
     redirect_to documents_path
   end
