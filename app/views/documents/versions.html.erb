@@ -4,6 +4,8 @@
     <% user = User.find_by(id: version.whodunnit) %>
     <% if user %>
       <p><%= version.created_at %> updated by <%= user.username %></p>
+      <% document_data = YAML.safe_load(version.object, permitted_classes: [ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, Time], aliases: true) %>
+      <p><%= document_data['transcription'] %></p>
     <% end %>
   <% end %>
 </div>
