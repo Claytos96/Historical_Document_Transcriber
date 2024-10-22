@@ -1,4 +1,5 @@
 class DocumentsController < ApplicationController
+  before_action :authenticate_user!, only: [:update, :new]
 
   def index
     @documents = Document.all
@@ -55,5 +56,12 @@ class DocumentsController < ApplicationController
 
   def document_params
     params.require(:document).permit(:image, :title, :description, :transcription, :user_id, :file)
+  end
+
+  def authenticate_user!
+    unless user_signed_in?
+      store_location_for(:user, request.fullpath) # Store the full path for redirect after login
+      redirect_to new_user_session_path, alert: 'Please log in to continue.'
+    end
   end
 end
