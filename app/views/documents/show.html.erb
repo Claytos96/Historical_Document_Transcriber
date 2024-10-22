@@ -50,7 +50,7 @@
       </div>
     <% end %>
     <br>
-    <% if @versions.last.whodunnit.present? %>
+    <% if @versions.present? && @versions.last.whodunnit.present? %>
       <p><%= link_to "Last updated by #{User.find(@versions.last.whodunnit).username} at #{@versions.last.created_at}", versions_document_path(@document)%></p>
     <% end %>
   </div>
