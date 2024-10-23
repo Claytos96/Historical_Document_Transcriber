@@ -1,11 +1,26 @@
 <h1>Edit History</h1>
-<div class='versions'>
-  <% @versions.each do |version| %>
-    <% user = User.find_by(id: version.whodunnit) %>
-    <% if user %>
-      <p><%= version.created_at %> updated by <%= user.username %></p>
-      <% document_data = YAML.safe_load(version.object, permitted_classes: [ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, Time], aliases: true) %>
-      <p><%= document_data['transcription'] %></p>
+<div class="edit-history d-flex">
+  <div class='versions'>
+    <% @versions.each do |version| %>
+      <% user = User.find_by(id: version.whodunnit) %>
+      <% if user %>
+        <div class="version-card">
+          <p><%= version.created_at %> updated by <%= user.username %></p>
+          <% document_data = YAML.safe_load(version.object, permitted_classes: [ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, Time], aliases: true) %>
+          <p><%= document_data['transcription'] %></p>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+  <div class="transcription-container">
+  </div>
 </div>
+
+<script>
+  const versions = document.querySelectorAll('.version-card')
+  versions.forEach((version) => {
+    version.addEventListener("click", (event) => {
+      document.querySelector('.transcription-container').innerHTML = ""
+    })
+  })
+</script>
