@@ -1,11 +1,11 @@
 <h1>Edit History</h1>
 <div class="edit-history d-flex">
   <div class='versions'>
-    <% @versions.reverse.each do |version| %>
+    <% @versions.reverse.each_with_index do |version, index| %>
       <% user = User.find_by(id: version.whodunnit) %>
       <% if user %>
         <% document_data = YAML.safe_load(version.object, permitted_classes: [ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, Time], aliases: true) %>
-        <div class="version-card" data-transcription="<%= document_data['transcription'] %>">
+        <div class="version-card" data-transcription="<%= document_data['transcription'] %>" data-index="<%= index %>" current-transcription="<%= @document.transcription %>">
           <p><%= version.created_at %> updated by <%= user.username %></p>
           <p><%= document_data['transcription'] %></p>
         </div>
@@ -21,8 +21,14 @@
   const versions = document.querySelectorAll('.version-card')
   versions.forEach((version) => {
     version.addEventListener("click", (event) => {
-      const transcription = version.getAttribute('data-transcription');
-      document.getElementById('transcription-text').value = transcription;
+      const index = parseInt(version.getAttribute('data-index'));
+      if (index > 0) {
+        const nextVersion = versions[index - 1];
+        const transcription = nextVersion.getAttribute('data-transcription');
+        document.getElementById('transcription-text').value = transcription;
+      } else {
+        document.getElementById('transcription-text').value = version.getAttribute('current-transcription');
+      }
     })
   })
 </script>
