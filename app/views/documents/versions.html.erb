@@ -29,7 +29,9 @@
         document.getElementById('transcription-text').value = transcription;
       } else {
         document.getElementById('transcription-text').value = version.getAttribute('current-transcription');
-      }
-    })
+      };
+      versions.forEach(v => v.classList.remove('selected'))
+      version.classList.add('selected')
+    });
   })
 </script>

@@ -11,6 +11,13 @@
   background-color: white;
 }
 
+.selected {
+  background-color: rgb(255, 255, 126);
+  -webkit-box-shadow:0px 0px 115px 4px rgba(221,245,84,0.9);
+  -moz-box-shadow: 0px 0px 115px 4px rgba(221,245,84,0.9);
+  box-shadow: 0px 0px 115px 4px rgba(221,245,84,0.9);
+}
+
 .transcription-container {
   margin: 60px;
 }
