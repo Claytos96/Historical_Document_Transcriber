@@ -1,4 +1,6 @@
-<h1> <%= @document.title %> - Edit History</h1>
+<div class="head">
+  <h1> <%= @document.title %> - Edit History</h1>
+</div>
 <div class="edit-history d-flex">
   <div class='versions'>
     <% @versions.reverse.each_with_index do |version, index| %>
