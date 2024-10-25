@@ -1,4 +1,4 @@
-<h1>Edit History</h1>
+<h1> <%= @document.title %> - Edit History</h1>
 <div class="edit-history d-flex">
   <div class='versions'>
     <% @versions.reverse.each_with_index do |version, index| %>
@@ -7,13 +7,12 @@
         <% document_data = YAML.safe_load(version.object, permitted_classes: [ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, Time], aliases: true) %>
         <div class="version-card" data-transcription="<%= document_data['transcription'] %>" data-index="<%= index %>" current-transcription="<%= @document.transcription %>">
           <p><%= version.created_at %> updated by <%= user.username %></p>
-          <p><%= document_data['transcription'] %></p>
         </div>
       <% end %>
     <% end %>
   </div>
   <div class="transcription-container">
-    <textarea id="transcription-text" rows="10" cols="50" readonly></textarea>
+    <textarea id="transcription-text" rows="18" cols="70" readonly></textarea>
   </div>
 </div>
 
