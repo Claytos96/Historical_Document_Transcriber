@@ -9,6 +9,8 @@
   padding: 10px;
   margin: 10px;
   background-color: white;
+  transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .selected {
