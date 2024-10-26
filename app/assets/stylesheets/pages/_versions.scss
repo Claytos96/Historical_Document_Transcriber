@@ -7,7 +7,7 @@
 .version-card {
   border: 1px solid darkblue;
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
   background-color: white;
   transition: background-color 0.3s;
   cursor: pointer;
@@ -26,4 +26,5 @@
 
 #transcription-text {
   padding: 10px;
+  position: fixed;
 }
