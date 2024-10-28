@@ -1,4 +1,36 @@
 <div class="head-index d-flex align-items-center justify-content-center">
   <h1 class>Your Documents</h1>
 </div>
-<div class="results"></div>
+<div class="results">
+  <div class="d-flex justify-content-center">
+    <div class="col-7">
+        <%= form_with url: documents_path, method: :get, class: "d-flex search-index" do %>
+          <%= text_field_tag :query,
+              params[:query],
+              class: "form-control search-bar-index",
+              placeholder: "Search Documents"
+          %>
+          <%= submit_tag "Search", name: "", class: "button" %>
+        <% end %>
+          <br>
+          <div class="property-counter">
+            <% if @documents.present? %>
+              <p><%= @documents.size %> search results</p>
+            <% else %>
+              <p>No documents found</p>
+            <% end %>
+          </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="doc-list col-8">
+      <% if @documents.any? %>
+        <% @documents.each do |document| %>
+          <a href="<%= document_path(document, return_to: request.fullpath) %>">
+            <%= render "card", document: document %>
+          </a>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

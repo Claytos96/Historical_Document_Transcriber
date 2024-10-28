@@ -11,7 +11,7 @@
               placeholder: "Search Documents"
           %>
           <%= submit_tag "Search", name: "", class: "button" %>
-          <% end %>
+        <% end %>
           <br>
           <div class="property-counter">
             <% if @documents.present? %>
@@ -20,13 +20,13 @@
               <p>No documents found</p>
             <% end %>
           </div>
-      </div>
+    </div>
   </div>
   <div class="d-flex justify-content-center">
     <div class="doc-list col-8">
       <% if @documents.any? %>
         <% @documents.each do |document| %>
-          <a href="<%= document_path(document) %>">
+          <a href="<%= document_path(document, return_to: request.fullpath) %>">
             <%= render "card", document: document %>
           </a>
         <% end %>

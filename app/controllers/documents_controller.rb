@@ -24,6 +24,7 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @user = @document.user
     @versions = @document.versions
+    session[:return_to] = params[:return_to] if params[:return_to].present?
   rescue ActiveRecord::RecordNotFound
     redirect_to documents_path, alert: 'Document not found.'
   end
@@ -36,7 +37,12 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     PaperTrail.request.whodunnit = current_user.id if current_user
     @document.update(document_params)
-    redirect_to documents_path
+    return_to = session.delete(:return_to)
+    if return_to&.include?(your_documents_path)
+      redirect_to your_documents_path, notice: 'Document was successfully updated.'
+    else
+      redirect_to documents_path, notice: 'Document was successfully updated.'
+    end
   end
 
   def destroy
@@ -65,4 +71,5 @@ class DocumentsController < ApplicationController
       redirect_to new_user_session_path, alert: 'Please log in to continue.'
     end
   end
+
 end
