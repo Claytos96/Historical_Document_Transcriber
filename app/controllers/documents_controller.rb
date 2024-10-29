@@ -52,6 +52,10 @@ class DocumentsController < ApplicationController
 
   def your_documents
     @documents = Document.where(user: current_user)
+    if params[:query].present?
+      query = "%#{params[:query].downcase}%"
+      @documents = @documents.where("LOWER(title) LIKE ? or LOWER(description) LIKE ?", query, query)
+    end
   end
 
   def versions
