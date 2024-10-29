@@ -6,54 +6,6 @@
   border-right: 3px solid darkblue;
 }
 
-.pic {
-  height: 100%;
-  width: 100px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-right: 1px solid darkblue;
-}
-
-.info {
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 100%;
-}
-
-
-
-.doc {
-  display: flex;
-  margin: 30px;
-  border: 5px solid darkblue;
-  background-color: white;
-  height: 150px;
-  transition: transform 0.3s;
-}
-
-.doc:hover {
-  transform: scale(1.05);
-}
-
-.info .title {
- border-bottom: 1px dashed black;
-}
-
-canvas.preview {
-  border: 1px solid #ddd;
-  max-width: 100%; /* Make canvas responsive */
-  max-height: 100%; /* Limit the height for consistency */
-  margin-top: 10px; /* Space above the canvas */
-}
-
-img.preview {
-  max-width: 100%;
-  max-height: 100%;
-  margin-top: 10px;
-}
-
 .search-index {
   margin-top: 50px;
   height: 70px;
