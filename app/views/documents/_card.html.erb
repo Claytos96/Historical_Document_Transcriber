@@ -62,6 +62,7 @@
     if (gearButton && !gearButton.dataset.listenerAdded) {
       gearButton.addEventListener('click', function(event) {
         event.stopPropagation(); // Prevent click from bubbling up
+        event.preventDefault();
         console.log('Gear button clicked'); // Debug log
         popoutMenu.classList.toggle('hidden'); // Toggle visibility
         console.log('Menu hidden:', popoutMenu.classList.contains('hidden')); // Debug log
