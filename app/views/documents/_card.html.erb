@@ -14,7 +14,7 @@
         <div class="popout">
           <button id="gear-button"><i class="bi bi-gear-fill"></i></button>
           <ul class="hidden popout-menu">
-            <li>Prohibit other users from transcribing</li>
+            <li data-document-id="<%= document.id %>">Prohibit other users from transcribing</li>
           </ul>
         </div>
       <% end %>
@@ -88,8 +88,34 @@
       popoutMenus.forEach(menu => {
         if (!menu.classList.contains('hidden')) {
           menu.classList.add('hidden');
-          console.log('Menu closed'); // Debug log
+          console.log('Menu closed');
         }
+      });
+    });
+
+    // Handle the click event for the lock menu item
+    document.querySelectorAll('.popout-menu li').forEach(item => {
+      item.addEventListener('click', function(event) {
+        const documentId = this.getAttribute('data-document-id');
+        event.stopPropagation();
+        event.preventDefault();
+
+        fetch(`/documents/${documentId}/lock`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content // Ensure CSRF token is included
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log('Document locked successfully');
+            // Optionally, update the UI or provide feedback to the user
+          } else {
+            console.error('Failed to lock the document');
+          }
+        })
+        .catch(error => console.error('Error:', error));
       });
     });
   });

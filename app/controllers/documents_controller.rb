@@ -63,6 +63,16 @@ class DocumentsController < ApplicationController
     @versions = @document.versions
   end
 
+  def lock
+    @document = Document.find(params[:id])
+    @document.update(locked: true)
+
+    respond_to do |format|
+      format.json { render json: { success: true } }
+      format.html { redirect_to documents_path, notice: 'Document locked.' }
+    end
+  end
+
   private
 
   def document_params

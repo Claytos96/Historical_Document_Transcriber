@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :documents do
     member do
       get :versions
+      patch :lock
     end
   end
 
