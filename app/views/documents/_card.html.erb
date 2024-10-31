@@ -54,28 +54,43 @@
       canvas.style.display = 'none'; // Hide canvas
     }
 
-    // Popout menu toggle
-    const gearButton = document.getElementById('gear-button');
-    const popoutMenu = document.querySelector('.popout-menu');
-
-    // Only add the event listener once
-    if (gearButton && !gearButton.dataset.listenerAdded) {
-      gearButton.addEventListener('click', function(event) {
+     // Add popout menu toggle for all gear buttons
+    document.querySelectorAll('.popout button').forEach(gearButton => {
+      // Use a unique listener function to avoid duplication
+      const toggleMenu = function(event) {
         event.stopPropagation(); // Prevent click from bubbling up
         event.preventDefault();
-        console.log('Gear button clicked'); // Debug log
-        popoutMenu.classList.toggle('hidden'); // Toggle visibility
-        console.log('Menu hidden:', popoutMenu.classList.contains('hidden')); // Debug log
-      });
-      gearButton.dataset.listenerAdded = true; // Mark listener as added
-    }
+
+        // Find the closest popout menu to the clicked button
+        const popoutMenu = this.nextElementSibling; // Assuming the popout menu is immediately after the button
+        if (popoutMenu) {
+          const isHidden = popoutMenu.classList.contains('hidden');
+          // Close all menus first
+          document.querySelectorAll('.popout-menu').forEach(menu => menu.classList.add('hidden'));
+          // Toggle the clicked menu
+          if (isHidden) {
+            popoutMenu.classList.remove('hidden');
+          }
+          console.log('Menu hidden:', popoutMenu.classList.contains('hidden')); // Debug log
+        }
+      };
+
+      // Add the event listener only if it hasn't been added before
+      if (!gearButton.dataset.listenerAdded) {
+        gearButton.addEventListener('click', toggleMenu);
+        gearButton.dataset.listenerAdded = true; // Mark listener as added
+      }
+    });
 
     // Close menu if clicking outside
     document.addEventListener('click', function() {
-      if (popoutMenu) {
-        popoutMenu.classList.add('hidden');
-        console.log('Menu closed'); // Debug log
-      }
+      const popoutMenus = document.querySelectorAll('.popout-menu');
+      popoutMenus.forEach(menu => {
+        if (!menu.classList.contains('hidden')) {
+          menu.classList.add('hidden');
+          console.log('Menu closed'); // Debug log
+        }
+      });
     });
   });
 </script>
