@@ -60,14 +60,17 @@ img.preview {
 
 .popout-menu {
   position: absolute; /* Position relative to the nearest positioned ancestor */
-  top: 0; /* Adjust as necessary */
+  top: -20px; /* Adjust as necessary */
   left: 100%; /* Position to the right of the button */
-  margin-left: 10px; /* Spacing between the button and the menu */
+  margin-left: 5px; /* Spacing between the button and the menu */
   display: block;
   background-color: white; /* Background color for the menu */
   border: 1px solid #ccc; /* Border around the menu */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
   z-index: 1000; /* Ensure it appears above other content */
+  width: 320px;
+  white-space: nowrap;
+  padding: 5px 10px;
 }
 
 .hidden {
