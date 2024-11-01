@@ -53,7 +53,7 @@ gem "cloudinary"
 
 gem 'image_processing', '~> 1.2'
 
-gem 'mini_magick'
+
 
 gem 'rest-client'
 

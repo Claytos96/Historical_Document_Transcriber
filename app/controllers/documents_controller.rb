@@ -73,6 +73,17 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def unlock
+    @document = Document.find(params[:id])
+    @document.update(locked: false)
+
+    respond_to do |format|
+      format.json { render json: { success: true } }
+      format.html { redirect_to documents_path, notice: 'Document unlocked.' }
+    end
+
+  end
+
   private
 
   def document_params

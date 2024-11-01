@@ -14,7 +14,8 @@
         <div class="popout">
           <button id="gear-button"><i class="bi bi-gear-fill"></i></button>
           <ul class="hidden popout-menu">
-            <li data-document-id="<%= document.id %>">Prohibit other users from transcribing</li>
+            <li class="lock" data-document-id="<%= document.id %>">Prohibit other users from transcribing <span class="tick-icon"><i class="bi bi-check2"></i></span></li>
+            <li class="unlock" data-document-id="<%= document.id %>">Allow other user to transcribe <span class="tick-icon"><i class="bi bi-check2"></i></span></li>
           </ul>
         </div>
       <% end %>
@@ -94,7 +95,7 @@
     });
 
     // Handle the click event for the lock menu item
-    document.querySelectorAll('.popout-menu li').forEach(item => {
+    document.querySelectorAll('.popout-menu li.lock').forEach(item => {
       item.addEventListener('click', function(event) {
         const documentId = this.getAttribute('data-document-id');
         event.stopPropagation();
@@ -110,9 +111,37 @@
         .then(response => {
           if (response.ok) {
             console.log('Document locked successfully');
-            // Optionally, update the UI or provide feedback to the user
+            item.querySelector('.tick-icon').classList.add('visible')
+            this.nextElementSibling.querySelector('.tick-icon').classList.remove('visible');
           } else {
             console.error('Failed to lock the document');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+      });
+    });
+
+    //Click event for unlock meu item
+    document.querySelectorAll('.popout-menu li.unlock').forEach(item => {
+      item.addEventListener('click', function(event) {
+        const documentId = this.getAttribute('data-document-id');
+        event.stopPropagation();
+        event.preventDefault();
+
+        fetch(`/documents/${documentId}/lock`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content // Ensure CSRF token is included
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log('Document unlocked successfully');
+             item.querySelector('.tick-icon').classList.add('visible');
+             this.previousElementSibling.querySelector('.tick-icon').classList.remove('visible');
+          } else {
+            console.error('Failed to unlock the document');
           }
         })
         .catch(error => console.error('Error:', error));
