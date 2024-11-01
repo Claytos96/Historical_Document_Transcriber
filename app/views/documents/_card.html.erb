@@ -14,8 +14,8 @@
         <div class="popout">
           <button id="gear-button"><i class="bi bi-gear-fill"></i></button>
           <ul class="hidden popout-menu">
-            <li class="lock" data-document-id="<%= document.id %>">Prohibit other users from transcribing <span class="tick-icon"><i class="bi bi-check2"></i></span></li>
-            <li class="unlock" data-document-id="<%= document.id %>">Allow other user to transcribe <span class="tick-icon"><i class="bi bi-check2"></i></span></li>
+            <li class="lock" data-document-id="<%= document.id %>">Prohibit other users from transcribing <span class="tick-icon <%= document.locked == true ? 'visible' : '' %>"><i class="bi bi-check2"></i></span></li>
+            <li class="unlock" data-document-id="<%= document.id %>">Allow other user to transcribe <span class="tick-icon <%= document.locked == false ? 'visible' : '' %>"><i class="bi bi-check2"></i></span></li>
           </ul>
         </div>
       <% end %>
