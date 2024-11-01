@@ -128,7 +128,7 @@
         event.stopPropagation();
         event.preventDefault();
 
-        fetch(`/documents/${documentId}/lock`, {
+        fetch(`/documents/${documentId}/unlock`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -137,7 +137,7 @@
         })
         .then(response => {
           if (response.ok) {
-            console.log('Document unlocked successfully');
+             console.log('Document unlocked successfully');
              item.querySelector('.tick-icon').classList.add('visible');
              this.previousElementSibling.querySelector('.tick-icon').classList.remove('visible');
           } else {

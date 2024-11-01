@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     member do
       get :versions
       patch :lock
+      patch :unlock
     end
   end
 

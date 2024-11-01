@@ -40,15 +40,28 @@
 
 <div class="show">
   <div class='transcription'>
+    <% if @document.locked == false %>
 
-    <%= simple_form_for [@document], url: document_path(@document), method: :put do |f| %>
-      <div class="box">
-        <%= f.input :transcription, as: :text, :input_html => { :cols => 70, :rows => 20 } %>
-      </div>
+      <%= simple_form_for [@document], url: document_path(@document), method: :put do |f| %>
+        <div class="box">
+          <%= f.input :transcription, as: :text, :input_html => { :cols => 70, :rows => 20 } %>
+        </div>
+        <div class="text-center">
+              <%= f.button :submit, user_signed_in? ? "Save" : "Login to Edit", class: 'btn-primary' %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Transcription</p>
+      <textarea class="p-3" rows="18" cols="70" readonly><%= @document.transcription %></textarea>
+      <br>
+      <br>
       <div class="text-center">
-            <%= f.button :submit, user_signed_in? ? "Save" : "Login to Edit", class: 'btn-primary' %>
+        <div class="badge bg-primary text-wrap text-center">
+          <h5>Document owner has locked transcriptions</h5>
+        </div>
       </div>
     <% end %>
+    <br>
     <br>
     <% if @versions.present? && @versions.last.whodunnit.present? %>
       <p><%= link_to "Last updated by #{User.find(@versions.last.whodunnit).username} at #{@versions.last.created_at}", versions_document_path(@document)%></p>

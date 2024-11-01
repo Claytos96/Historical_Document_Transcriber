@@ -65,6 +65,7 @@ class DocumentsController < ApplicationController
 
   def lock
     @document = Document.find(params[:id])
+    PaperTrail.request.whodunnit = current_user.id if current_user
     @document.update(locked: true)
 
     respond_to do |format|
@@ -75,6 +76,7 @@ class DocumentsController < ApplicationController
 
   def unlock
     @document = Document.find(params[:id])
+    PaperTrail.request.whodunnit = current_user.id if current_user
     @document.update(locked: false)
 
     respond_to do |format|
