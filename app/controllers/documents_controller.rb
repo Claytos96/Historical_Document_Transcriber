@@ -4,6 +4,7 @@ class DocumentsController < ApplicationController
   def index
     @documents = Document.all
     if params[:query].present?
+      session[:search_query] = params[:query]
       query = "%#{params[:query].downcase}%"
       @documents = @documents.where("LOWER(title) LIKE ? or LOWER(description) LIKE ?", query, query)
     end
@@ -39,9 +40,9 @@ class DocumentsController < ApplicationController
     @document.update(document_params)
     return_to = session.delete(:return_to)
     if return_to&.include?(your_documents_path)
-      redirect_to your_documents_path, notice: 'Document was successfully updated.'
+      redirect_to your_documents_path(query: session[:search_query]), notice: 'Document was successfully updated.'
     else
-      redirect_to documents_path, notice: 'Document was successfully updated.'
+      redirect_to documents_path(query: session[:search_query]), notice: 'Document was successfully updated.'
     end
   end
 
@@ -53,6 +54,7 @@ class DocumentsController < ApplicationController
   def your_documents
     @documents = Document.where(user: current_user)
     if params[:query].present?
+      session[:search_query] = params[:query]
       query = "%#{params[:query].downcase}%"
       @documents = @documents.where("LOWER(title) LIKE ? or LOWER(description) LIKE ?", query, query)
     end
