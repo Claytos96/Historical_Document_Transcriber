@@ -23,6 +23,7 @@
   versions.forEach((version) => {
     version.addEventListener("click", (event) => {
       const index = parseInt(version.getAttribute('data-index'));
+      console.log(index)
       if (index > 0) {
         const nextVersion = versions[index - 1];
         const transcription = nextVersion.getAttribute('data-transcription');
