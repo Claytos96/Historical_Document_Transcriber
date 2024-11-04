@@ -32,6 +32,7 @@ class DocumentsController < ApplicationController
 
   def edit
     @document = Document.find(params[:id])
+    session[:return_to] = request.referer
   end
 
   def update
@@ -39,6 +40,7 @@ class DocumentsController < ApplicationController
     PaperTrail.request.whodunnit = current_user.id if current_user
     @document.update(document_params)
     return_to = session.delete(:return_to)
+
     if return_to&.include?(your_documents_path)
       redirect_to your_documents_path(query: session[:search_query]), notice: 'Document was successfully updated.'
     else

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/your_documnets", to: "documents#your_documents", as: 'your_documents'
+  get "/your_documents", to: "documents#your_documents", as: 'your_documents'
 
   root to: "pages#home"
 end

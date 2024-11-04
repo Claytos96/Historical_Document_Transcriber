@@ -26,11 +26,21 @@
     <div class="doc-list col-8">
       <% if @documents.any? %>
         <% @documents.each do |document| %>
-          <a href="<%= document_path(document, return_to: request.fullpath) %>">
+          <div class="doc" data-url="<%= document_path(document, return_to: request.fullpath) %>">
             <%= render "card", document: document %>
-          </a>
+          </div>
         <% end %>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  document.querySelectorAll('.doc').forEach(doc => {
+    doc.addEventListener('click', function() {
+      const url = this.getAttribute('data-url');
+      window.location.href = url;
+    });
+  });
+
+</script>

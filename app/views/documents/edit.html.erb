@@ -1,0 +1,21 @@
+<div class="content">
+  <h1>Edit Your Document</h1>
+  <div class="add-doc">
+    <%= simple_form_for [@document] do |f| %>
+      <div class="form">
+        <%= f.input :title,
+                    required: true,
+                    autofocus: true %>
+        <%= f.input :description, as: :text, :input_html => { :cols => 5, :rows => 3 },
+                    required: true,
+                    autofocus: true %>
+        <%= f.input :transcription, as: :text, :input_html => { :cols => 5, :rows => 10 },
+                    autofocus: true %>
+        <%= f.input :file, as: :file %>
+        <div class="text-center">
+          <%= f.button :submit, "Save Document", class: 'btn-secondary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
