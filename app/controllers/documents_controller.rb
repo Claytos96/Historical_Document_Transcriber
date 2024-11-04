@@ -7,6 +7,8 @@ class DocumentsController < ApplicationController
       session[:search_query] = params[:query]
       query = "%#{params[:query].downcase}%"
       @documents = @documents.where("LOWER(title) LIKE ? or LOWER(description) LIKE ?", query, query)
+    else
+      session.delete(:search_query)
     end
   end
 
@@ -40,11 +42,15 @@ class DocumentsController < ApplicationController
     PaperTrail.request.whodunnit = current_user.id if current_user
     @document.update(document_params)
     return_to = session.delete(:return_to)
-
-    if return_to&.include?(your_documents_path)
+    search_query = session[:search_query]
+    if return_to&.include?(your_documents_path) && search_query.present?
       redirect_to your_documents_path(query: session[:search_query]), notice: 'Document was successfully updated.'
-    else
+    elsif !return_to&.include?(your_documents_path) && search_query.present?
       redirect_to documents_path(query: session[:search_query]), notice: 'Document was successfully updated.'
+    elsif return_to&.include?(your_documents_path) && search_query.blank?
+      redirect_to your_documents_path, notice: 'Document was succesfully updated.'
+    else
+      redirect to documents_path, notice: 'Document was succesfully updated.'
     end
   end
 
@@ -59,6 +65,8 @@ class DocumentsController < ApplicationController
       session[:search_query] = params[:query]
       query = "%#{params[:query].downcase}%"
       @documents = @documents.where("LOWER(title) LIKE ? or LOWER(description) LIKE ?", query, query)
+    else
+      session.delete(:search_query)
     end
   end
 
