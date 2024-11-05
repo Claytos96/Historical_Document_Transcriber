@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :documents do
+  resources :documents, except: :destroy do
     member do
       get :versions
       patch :lock
@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   end
 
   get "/your_documents", to: "documents#your_documents", as: 'your_documents'
+
+  delete 'documents/:id/destroy', to: 'documents#destroy', as: 'destroy_document'
 
   root to: "pages#home"
 end

@@ -17,7 +17,6 @@
             <li class="lock" data-document-id="<%= document.id %>">Prohibit other users from transcribing <span class="tick-icon <%= document.locked == true ? 'visible' : '' %>"><i class="bi bi-check2"></i></span></li>
             <li class="unlock" data-document-id="<%= document.id %>">Allow other user to transcribe <span class="tick-icon <%= document.locked == false ? 'visible' : '' %>"><i class="bi bi-check2"></i></span></li>
             <li class="edit-link" data-href="<%= edit_document_path(document) %>">Edit</li>
-            <li class="delete-link" data-href="<%= document_path(document) %>">Delete</li>
           </ul>
         </div>
       <% end %>
@@ -156,33 +155,6 @@
         event.stopPropagation();
         const url = this.getAttribute('data-href');
         window.location.href = url;
-      });
-    });
-
-    // Handle delete link click
-    document.querySelectorAll('.delete-link').forEach(link => {
-      link.addEventListener('click', function(event) {
-        event.stopPropagation();
-        const href = this.getAttribute('data-href');
-        if (confirm('Are you sure you want to delete this document?')) {
-          fetch(href, {
-            method: 'DELETE',
-            headers: {
-              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content // CSRF token
-            }
-          })
-          .then(response => {
-            if (response.ok) {
-              window.location.reload(); // Refresh the page to see changes
-            } else {
-              alert('There was an error deleting the document.');
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            alert('There was an error deleting the document.');
-          });
-        }
       });
     });
   });
