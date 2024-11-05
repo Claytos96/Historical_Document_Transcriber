@@ -3,7 +3,7 @@
   <h1 class="text-center">Edit Your Document</h1>
    <%= form_with url: destroy_document_path(@document), method: :delete, class: "delete-form" do |f| %>
       <%= f.hidden_field :document_id, value: @document.id %> <!-- Hidden field for document ID -->
-      <button type="submit" class="btn btn-secondary position-absolute top-0 end-0 p-2 me-3 fs-4" id="delete-document-btn">
+      <button type="submit" class="btn btn-secondary position-absolute bg-transparent border-0 top-0 end-0 p-2 me-4 fs-4" id="delete-document-btn">
         <i class="bi bi-trash"></i>
       </button>
     <% end %>

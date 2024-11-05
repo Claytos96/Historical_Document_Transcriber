@@ -21,5 +21,7 @@ Rails.application.routes.draw do
 
   delete 'documents/:id/destroy', to: 'documents#destroy', as: 'destroy_document'
 
+  get "/about", to: "pages#about", as: 'about'
+
   root to: "pages#home"
 end
