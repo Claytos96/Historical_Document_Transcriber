@@ -1,11 +1,17 @@
 .pic {
   height: 100%;
-  width: 100px;
+  min-width: 100px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   border-right: 1px solid darkblue;
+}
+
+.title {
+  max-width: 350px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .info {
