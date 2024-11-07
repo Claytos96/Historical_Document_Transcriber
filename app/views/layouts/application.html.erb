@@ -18,7 +18,7 @@
   </head>
 
   <body class="<%= (controller_name == 'documents' && action_name == 'show') || (controller_name == 'documents' && action_name == 'versions') ? 'exempt-background' : ((controller_name == 'documents' && action_name == 'index') || (controller_name == 'documents' && action_name == 'your_documents') ? 'index-background' : '') %>">
-    <% unless controller_name == 'pages' && action_name %>
+    <% unless controller_name == 'pages' && action_name == 'home' %>
       <%= render 'shared/home_button' %>
     <% end %>
     </header>
