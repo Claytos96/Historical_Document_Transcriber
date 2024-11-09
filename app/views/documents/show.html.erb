@@ -68,58 +68,79 @@
     <% end %>
   </div>
 
+  <% if @document.files.count > 1 %>
+    <div class="file-navigation text-center">
+      <button id="prev-file" class="btn btn-secondary">← Previous</button>
+      <button id="next-file" class="btn btn-secondary">Next →</button>
+    </div>
+  <% end %>
+
   <div class="container-outer">
     <p class="text-end mb-1">Hold control key to zoom</p>
     <div id="pdf-container"></div>
   </div>
   <script>
     function initPDF() {
-        const url = '<%= url_for(@document.files.first) %>';
+        let currentFileIndex = 0; // Start with the first file
+        const files = <%= raw(@document.files.map { |f| url_for(f) }.to_json) %>; // Array of file URLs
+        console.log(files)
         const pdfjsLib = window['pdfjs-dist/build/pdf'];
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
 
         let pdfDoc = null;
         let scale = 1.0; // Start with a default zoom level
-
-        function loadPDF() {
-            const loadingTask = pdfjsLib.getDocument(url);
-            loadingTask.promise.then(pdf => {
-                pdfDoc = pdf;
-                renderAllPages(); // Render all pages initially
-            }).catch(error => {
-                console.error('Error loading PDF: ', error);
-            });
-        }
-
-        function renderAllPages() {
-            const container = document.getElementById('pdf-container');
-            container.innerHTML = ''; // Clear the container before rendering
-
-            for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-                pdfDoc.getPage(pageNum).then(page => {
-                    const viewport = page.getViewport({ scale });
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    const renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-                    page.render(renderContext);
-
-                    // Append the canvas to the container
-                    container.appendChild(canvas);
-                });
-            }
-        }
-
         let img;
 
-        function loadImage() {
-          const container = document.getElementById('pdf-container')
-          img = document.createElement('img')
+        // Function to load PDF file
+        function loadPDF() {
+          const url = files[currentFileIndex]; // Get the current file URL
+          const container = document.getElementById('pdf-container');
+          container.innerHTML = ''; // Clear the container before rendering
+          scale = 1.0;
+          const isPDF = url.endsWith('.pdf');
+          if (isPDF) {
+            const container = document.getElementById('pdf-container');
+            const loadingTask = pdfjsLib.getDocument(url);
+            loadingTask.promise.then(pdf => {
+              pdfDoc = pdf;
+              renderAllPages(); // Render all pages initially
+            }).catch(error => {
+              console.error('Error loading PDF: ', error);
+            });
+          } else {
+            loadImage(url); // Load image if it's not a PDF
+          }
+        }
+
+        // Function to render all pages of the PDF
+        function renderAllPages() {
+          const container = document.getElementById('pdf-container');
+          container.innerHTML = ''; // Clear the container before rendering
+
+          for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+            pdfDoc.getPage(pageNum).then(page => {
+              const viewport = page.getViewport({ scale });
+              const canvas = document.createElement('canvas');
+              const context = canvas.getContext('2d');
+              canvas.height = viewport.height;
+              canvas.width = viewport.width;
+
+              const renderContext = {
+                canvasContext: context,
+                viewport: viewport
+              };
+              page.render(renderContext);
+
+              // Append the canvas to the container
+              container.appendChild(canvas);
+            });
+          }
+        }
+
+        // Function to load image files
+        function loadImage(url) {
+          const container = document.getElementById('pdf-container');
+          img = document.createElement('img');
           img.src = url;
           img.style.maxWidth = '100%'; // Scale the image to fit the container
           img.style.transition = `transform 0.2s`; // Smooth scaling transition
@@ -127,7 +148,7 @@
           container.appendChild(img);
 
           img.onerror = () => {
-              console.error('Error loading image: ', url);
+            console.error('Error loading image: ', url);
           };
 
           img.onload = () => {
@@ -137,12 +158,26 @@
           };
         }
 
-         // Determine file type
-        const isPDF = url.endsWith('.pdf');
-        if (isPDF) {
-            loadPDF(); // Load as PDF
-        } else {
-            loadImage(); // Load as image
+        // Function to show the next file
+        function showNextFile() {
+          if (currentFileIndex < files.length - 1) {
+            currentFileIndex++;
+            loadPDF(); // Reload the new file
+          }
+        }
+
+        // Function to show the previous file
+        function showPrevFile() {
+          if (currentFileIndex > 0) {
+            currentFileIndex--;
+            loadPDF(); // Reload the previous file
+          }
+        }
+
+        // Event listeners for navigation buttons
+        if (files.length > 1) {
+        document.getElementById('next-file').addEventListener('click', showNextFile);
+        document.getElementById('prev-file').addEventListener('click', showPrevFile);
         }
 
         // Mouse wheel zooming with Ctrl key
