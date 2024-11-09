@@ -1,6 +1,6 @@
 
   <div class="pic">
-    <% if document.file.attached? %>
+    <% if document.files.attached? %>
       <canvas class="preview" id="pdf-canvas-<%= document.id %>"></canvas>
       <img class="preview" id="jpeg-image-<%= document.id %>"/>
     <% end %>
@@ -27,7 +27,7 @@
 
 <script>
   document.addEventListener("turbo:load", function() {
-    const fileUrl = '<%= url_for(document.file) %>';
+    const fileUrl = '<%= url_for(document.files.first) %>';
     const canvas = document.getElementById('pdf-canvas-<%= document.id %>');
     const img = document.getElementById('jpeg-image-<%= document.id %>');
     const fileExtension = fileUrl.split('.').pop().toLowerCase();
