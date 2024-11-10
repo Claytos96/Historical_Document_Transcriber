@@ -5,7 +5,7 @@ iframe {
 }
 
 #pdf-container {
-  width: 100%;
+  min-width: 100%;
   overflow: auto; /* Enable scrolling */
   max-height: 500px; /* Set a max height */
   position: relative;
