@@ -68,15 +68,16 @@
     <% end %>
   </div>
 
-  <% if @document.files.count > 1 %>
-    <div class="file-navigation text-center">
-      <button id="prev-file" class="btn btn-secondary">← Previous</button>
-      <button id="next-file" class="btn btn-secondary">Next →</button>
-    </div>
-  <% end %>
-
   <div class="container-outer">
-    <p class="text-end mb-1">Hold control key to zoom</p>
+    <div class="d-flex justify-content-between max-w-100">
+      <div>
+        <% if @document.files.size > 1 %>
+          <button id="prev-file" class="btn-arrow">←</button>
+          <button id="next-file" class="btn-arrow">→</button>
+        <% end %>
+      </div>
+      <p class="text-end mb-1">Hold control key to zoom</p>
+    </div>
     <div id="pdf-container"></div>
   </div>
   <script>
