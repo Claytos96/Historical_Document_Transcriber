@@ -96,6 +96,7 @@
           const url = files[currentFileIndex]; // Get the current file URL
           const container = document.getElementById('pdf-container');
           container.innerHTML = ''; // Clear the container before rendering
+          container.scrollTop = 0
           scale = 1.0;
           const isPDF = url.endsWith('.pdf');
           if (isPDF) {
