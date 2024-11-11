@@ -76,6 +76,9 @@
           <button id="next-file" class="btn-arrow">→</button>
         <% end %>
       </div>
+      <% if @document.files.size > 1 %>
+        <p>Page <span id="pageNumber">1</span> / <%= @document.files.size %></p>
+      <% end %>
       <p class="text-end mb-1">Hold control key to zoom</p>
     </div>
     <div id="pdf-container"></div>
@@ -84,7 +87,6 @@
     function initPDF() {
         let currentFileIndex = 0; // Start with the first file
         const files = <%= raw(@document.files.map { |f| url_for(f) }.to_json) %>; // Array of file URLs
-        console.log(files)
         const pdfjsLib = window['pdfjs-dist/build/pdf'];
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
 
@@ -164,6 +166,7 @@
         function showNextFile() {
           if (currentFileIndex < files.length - 1) {
             currentFileIndex++;
+            document.getElementById('pageNumber').textContent = currentFileIndex + 1
             loadPDF(); // Reload the new file
           }
         }
@@ -172,6 +175,7 @@
         function showPrevFile() {
           if (currentFileIndex > 0) {
             currentFileIndex--;
+            document.getElementById('pageNumber').textContent = currentFileIndex + 1
             loadPDF(); // Reload the previous file
           }
         }
