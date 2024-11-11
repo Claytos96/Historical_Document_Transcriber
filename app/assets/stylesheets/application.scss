@@ -31,7 +31,8 @@ body {
 }
 
 body.exempt-background {
-  background-image: none;
+  background-image: url("beige.jpeg");
+  background-size: 90%;
 }
 
 body.index-background {

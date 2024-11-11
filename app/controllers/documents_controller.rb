@@ -50,7 +50,7 @@ class DocumentsController < ApplicationController
     elsif return_to&.include?(your_documents_path) && search_query.blank?
       redirect_to your_documents_path, notice: 'Document was succesfully updated.'
     else
-      redirect to documents_path, notice: 'Document was succesfully updated.'
+      redirect_to documents_path, notice: 'Document was succesfully updated.'
     end
   end
 
