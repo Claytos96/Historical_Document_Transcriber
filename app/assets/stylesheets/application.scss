@@ -33,11 +33,12 @@ body {
 body.exempt-background {
   background-image: url("beige.jpeg");
   background-size: 90%;
+  background-attachment: fixed;
 }
 
 body.index-background {
-  background-image: url("handwritting.png");
-  background-size: 50%;
+  background-image: url("stock_handwritting.jpeg");
+
   margin: 0;
   background-attachment: fixed; /* Makes the background fixed */
 }
