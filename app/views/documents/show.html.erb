@@ -40,7 +40,7 @@
 
 <div class="show">
   <div class='transcription'>
-    <% if @document.locked == false || current_user != @document.user_id %>
+    <% if @document.locked == false || current_user == @document.user_id %>
 
       <%= simple_form_for [@document], url: document_path(@document), method: :put do |f| %>
         <div class="box">
