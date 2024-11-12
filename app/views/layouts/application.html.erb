@@ -15,6 +15,9 @@
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
+
+
+
   </head>
 
   <body class="<%= (controller_name == 'documents' && action_name == 'show') || (controller_name == 'documents' && action_name == 'versions') ? 'exempt-background' : ((controller_name == 'documents' && action_name == 'index') || (controller_name == 'documents' && action_name == 'your_documents') ? 'index-background' : '') %>">
