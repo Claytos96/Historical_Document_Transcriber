@@ -96,4 +96,20 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   config.action_mailer.default_url_options = { host: 'https://digitalhistories-c7741cf57793.herokuapp.com/', protocol: 'https' }
+
+  # SMTP Settings for email delivery
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.live.com',  # Replace with your email provider's SMTP server (e.g., Mailgun, SendGrid)
+    port: 587,                    # Most common SMTP ports: 587 for TLS, 465 for SSL, 25 for non-secure
+    domain: 'hotmail.com',      # Your domain name (e.g., example.com or mailgun.org)
+    user_name: ENV['Hotmail_EMAIL'], # Use environment variable for sensitive credentials
+    password: ENV['HOTMAIL_PASSWORD'],  # Use environment variable for sensitive credentials
+    authentication: 'plain',       # SMTP authentication method (plain is common)
+    enable_starttls_auto: true     # Enable STARTTLS to encrypt the connection
+  }
+
+  # Ensure emails are sent through the appropriate domain and use secure URLs.
+  config.action_mailer.default_url_options = { host: 'https://digitalhistories-c7741cf57793.herokuapp.com', protocol: 'https' }
+
 end
