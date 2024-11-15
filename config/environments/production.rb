@@ -104,7 +104,7 @@ Rails.application.configure do
     user_name: ENV['HOTMAIL_EMAIL'], # Using claytos97@yahoo.com
     password: ENV['HOTMAIL_PASSWORD'],
     authentication: 'login',       # SMTP authentication method (plain is common)
-    enable_starttls_auto: true     # Enable STARTTLS to encrypt the connection
+    enable_starttls_auto: true,     # Enable STARTTLS to encrypt the connection
     ssl: true
   }
 
