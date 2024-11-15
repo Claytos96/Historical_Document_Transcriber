@@ -103,7 +103,7 @@ Rails.application.configure do
     address: 'smtp.live.com',  # Replace with your email provider's SMTP server (e.g., Mailgun, SendGrid)
     port: 587,                    # Most common SMTP ports: 587 for TLS, 465 for SSL, 25 for non-secure
     domain: 'hotmail.com',      # Your domain name (e.g., example.com or mailgun.org)
-    user_name: ENV['Hotmail_EMAIL'], # Use environment variable for sensitive credentials
+    user_name: ENV['HOTMAIL_EMAIL'], # Use environment variable for sensitive credentials
     password: ENV['HOTMAIL_PASSWORD'],  # Use environment variable for sensitive credentials
     authentication: 'plain',       # SMTP authentication method (plain is common)
     enable_starttls_auto: true     # Enable STARTTLS to encrypt the connection
