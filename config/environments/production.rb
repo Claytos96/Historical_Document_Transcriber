@@ -95,21 +95,22 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  config.action_mailer.default_url_options = { host: 'https://digitalhistories-c7741cf57793.herokuapp.com/', protocol: 'https' }
-
   # SMTP Settings for email delivery
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.live.com',  # Replace with your email provider's SMTP server (e.g., Mailgun, SendGrid)
-    port: 587,                    # Most common SMTP ports: 587 for TLS, 465 for SSL, 25 for non-secure
-    domain: 'hotmail.com',      # Your domain name (e.g., example.com or mailgun.org)
-    user_name: ENV['HOTMAIL_EMAIL'], # Use environment variable for sensitive credentials
-    password: ENV['HOTMAIL_PASSWORD'],  # Use environment variable for sensitive credentials
-    authentication: 'plain',       # SMTP authentication method (plain is common)
+    address: 'smtp.mail.yahoo.com',  # Replace with your email provider's SMTP server (e.g., Mailgun, SendGrid)
+    port: 465,                    # Most common SMTP ports: 587 for TLS, 465 for SSL, 25 for non-secure
+    domain: 'yahoo.com',      # Your domain name (e.g., example.com or mailgun.org)
+    user_name: ENV['HOTMAIL_EMAIL'], # Using claytos97@yahoo.com
+    password: ENV['HOTMAIL_PASSWORD'],
+    authentication: 'login',       # SMTP authentication method (plain is common)
     enable_starttls_auto: true     # Enable STARTTLS to encrypt the connection
+    ssl: true
   }
 
   # Ensure emails are sent through the appropriate domain and use secure URLs.
   config.action_mailer.default_url_options = { host: 'https://digitalhistories-c7741cf57793.herokuapp.com', protocol: 'https' }
+
+  config.action_mailer.default_options = { from: ENV['HOTMAIL_EMAIL'] } # Actually yahoo email
 
 end
