@@ -40,7 +40,7 @@
 <%= puts user_signed_in? %>
 <div class="show">
   <div class='transcription'>
-    <% if user_signed_in? && (@document.locked == false || (@document.locked == true && current_user.id == @document.id)) %>
+    <% if user_signed_in? && (@document.locked == false || (@document.locked == true && current_user.id == @document.user_id)) %>
 
       <%= simple_form_for [@document], url: document_path(@document), method: :put do |f| %>
         <div class="box">
