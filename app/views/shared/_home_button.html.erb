@@ -1,5 +1,5 @@
 <% button_class = (controller_name == 'documents' && action_name == 'index') || (controller_name == 'documents' && action_name == 'your_documents') ? 'home-button-index' : 'home-button' %>
 
-<div class="<%= controller_name == 'documents' && action_name == 'index' ? 'home-button-container-index' : 'home-button-container'%>">
-  <%= link_to '<i class="bi bi-house-door-fill"></i>'.html_safe, root_path, class: button_class %>
+<div class="<%= controller_name == 'documents' && action_name == 'index' ? 'home-button-container-index' : 'home-button-container' %>">
+  <%= link_to image_tag('Transcribe_History_Logo.png', alt: 'Home', class: button_class, width: '90', height: '90'), root_path %>
 </div>
